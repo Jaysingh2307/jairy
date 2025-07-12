@@ -1,49 +1,46 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const chatContainer = document.createElement("div");
-  chatContainer.style.position = "fixed";
-  chatContainer.style.bottom = "20px";
-  chatContainer.style.right = "20px";
-  chatContainer.style.background = "#1e1e1e";
-  chatContainer.style.border = "1px solid #00bcd4";
-  chatContainer.style.borderRadius = "12px";
-  chatContainer.style.width = "300px";
-  chatContainer.style.boxShadow = "0 0 12px rgba(0,188,212,0.5)";
-  chatContainer.style.overflow = "hidden";
-  chatContainer.style.zIndex = "1000";
-  chatContainer.style.fontFamily = "sans-serif";
 
-  chatContainer.innerHTML = `
-    <div style="background:#00bcd4;padding:10px;color:#000;font-weight:bold">Ask JaiBo 🤖</div>
-    <div id="chatLog" style="padding:10px;height:200px;overflow-y:auto;font-size:14px;color:#e0e0e0;"></div>
-    <div style="display:flex;border-top:1px solid #00bcd4;">
-      <input id="chatInput" type="text" placeholder="Type a question..." style="flex:1;padding:8px;border:none;background:#121212;color:#e0e0e0;">
-      <button id="sendBtn" style="background:#00bcd4;border:none;padding:8px;color:#000;font-weight:bold;">Send</button>
-    </div>
-  `;
+const messages = document.getElementById("messages");
+const input = document.getElementById("input");
 
-  document.body.appendChild(chatContainer);
+function sendMessage() {
+  const text = input.value.trim();
+  if (!text) return;
 
-  const chatLog = document.getElementById("chatLog");
-  const chatInput = document.getElementById("chatInput");
-  const sendBtn = document.getElementById("sendBtn");
+  addMessage("user", text);
+  input.value = "";
 
-  function addMessage(sender, message) {
-    const msg = document.createElement("div");
-    msg.innerHTML = `<strong>${sender}:</strong> ${message}`;
-    msg.style.marginBottom = "8px";
-    chatLog.appendChild(msg);
-    chatLog.scrollTop = chatLog.scrollHeight;
+  setTimeout(() => {
+    const response = generateBotReply(text);
+    addMessage("bot", response);
+  }, 500);
+}
+
+function addMessage(sender, text) {
+  const msg = document.createElement("div");
+  msg.className = "message " + sender;
+  msg.style.marginBottom = "12px";
+  msg.style.padding = "10px";
+  msg.style.borderRadius = "10px";
+  msg.style.maxWidth = "75%";
+  msg.style.background = sender === "user" ? "#00bcd4" : "#2c2c2c";
+  msg.style.color = sender === "user" ? "#000" : "#e0e0e0";
+  msg.innerText = text;
+  msg.style.alignSelf = sender === "user" ? "flex-end" : "flex-start";
+  messages.appendChild(msg);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function generateBotReply(input) {
+  const lowered = input.toLowerCase();
+  if (
+    lowered.includes("politics") ||
+    lowered.includes("religion") ||
+    lowered.includes("abuse")
+  ) {
+    return "⚠️ JaiBo Alert: Please keep the conversation respectful and educational only.";
   }
-
-  sendBtn.onclick = () => {
-    const question = chatInput.value.trim();
-    if (question) {
-      addMessage("You", question);
-      chatInput.value = "";
-      setTimeout(() => {
-        const response = "I'm JaiBo! I'll help you with study materials soon. 😊";
-        addMessage("JaiBo", response);
-      }, 500);
-    }
-  };
-});
+  if (lowered.includes("ncert") || lowered.includes("biology")) {
+    return "You can explore Biology NCERT questions in our NEET section. Want me to show a sample?";
+  }
+  return "Thanks for your message! JaiBo will get back to you with a study-related reply.";
+}
