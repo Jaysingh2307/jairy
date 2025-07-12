@@ -3,92 +3,172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jairy.in - Clean Learning Revolution</title>
+  <title>Jairy – Study Materials & Doubts</title>
   <style>
-    body {
-      font-family: sans-serif;
-      background: #f8fafc;
+    :root {
+      --bg: #121212;
+      --surface: #1e1e1e;
+      --primary: #00bcd4;
+      --text: #e0e0e0;
+      --text-light: #9e9e9e;
+      --radius: 12px;
+    }
+    * {
       margin: 0;
       padding: 0;
-      color: #111;
+      box-sizing: border-box;
+      font-family: "Roboto", sans-serif;
     }
-    header {
-      background: #1e293b;
-      color: #fff;
-      padding: 1rem 2rem;
-      text-align: center;
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
-    h1 {
-      margin: 0;
-      font-size: 2rem;
+    a {
+      color: var(--primary);
+      text-decoration: none;
     }
-    .tagline {
-      font-size: 1rem;
-      margin-top: 0.5rem;
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: var(--surface);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .search-wrapper {
+      flex: 1;
+      max-width: 500px;
+      margin: 0 1rem;
+    }
+    .search-wrapper input {
+      width: 100%;
+      padding: 0.6rem 0.9rem;
+      background: var(--bg);
+      border: 1px solid var(--surface);
+      border-radius: var(--radius);
+      color: var(--text);
+    }
+    .lang-toggle {
+      cursor: pointer;
+      background: var(--primary);
+      color: #000;
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .lang-toggle:hover {
+      opacity: 0.85;
     }
     main {
-      max-width: 700px;
+      flex: 1;
+      width: 100%;
+      max-width: 1200px;
       margin: 2rem auto;
-      padding: 1rem;
+      padding: 0 1rem;
     }
-    .card {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 1rem 1.5rem;
+    section {
+      margin-bottom: 2.5rem;
+    }
+    .section-title {
+      font-size: 1.3rem;
       margin-bottom: 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      color: var(--primary);
     }
-    .card h2 {
-      margin-top: 0;
-    }
-    .button {
-      background: #3b82f6;
-      color: white;
-      padding: 0.5rem 1rem;
-      text-decoration: none;
-      border-radius: 8px;
-      display: inline-block;
-      margin-top: 0.5rem;
-    }
-    .footer {
+    .exam-select {
+      background: var(--surface);
+      padding: 1rem;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
       text-align: center;
+    }
+    .exam-select label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .exam-select select {
+      padding: 0.6rem;
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--surface);
+    }
+    .upload-list {
+      list-style: none;
+    }
+    .upload-item {
+      background: var(--surface);
+      margin-bottom: 0.7rem;
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+    .upload-item span {
+      color: var(--text-light);
       font-size: 0.8rem;
-      margin-top: 2rem;
-      color: #6b7280;
+    }
+    .chat-placeholder {
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: var(--radius);
+      text-align: center;
+      font-style: italic;
+      color: var(--text-light);
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Jairy.in</h1>
-    <div class="tagline">India's Cleanest, Smartest, Student-First Learning Platform</div>
-  </header>
+  <nav>
+    <div class="logo">Jairy 📘</div>
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="Search books, notes..." />
+    </div>
+    <div id="langToggle" class="lang-toggle">हिन्दी</div>
+  </nav>
+
   <main>
-    <div class="card">
-      <h2>🚀 What is Jairy?</h2>
-      <p>Jairy is a free education hub where students get smart, clean, AI-enhanced study material — completely free of branding, piracy, or confusion. We clean and recreate content daily using our custom-built AI bot — <strong>JaiBo</strong>.</p>
-    </div>
+    <section class="exam-select">
+      <label for="examSelector">Which exam are you preparing for?</label>
+      <select id="examSelector">
+        <option value="neet">NEET</option>
+        <option value="jee">JEE</option>
+        <option value="upsc">UPSC</option>
+        <option value="ssc">SSC</option>
+        <option value="banking">Banking</option>
+        <option value="other">Other</option>
+      </select>
+    </section>
 
-    <div class="card">
-      <h2>📁 Cleaned PDF Library</h2>
-      <p>We upload restructured, branding-free modules daily. All chapters are AI-cleaned and Jairy-approved.</p>
-      <a class="button" href="#">Download Clean Modules</a>
-    </div>
+    <section id="practiceSection">
+      <h2 class="section-title">Practice Questions – NEET Biology</h2>
+      <ul class="upload-list">
+        <li class="upload-item">
+          <a href="files/cell_cycle_and_division_exercise.pdf" target="_blank">Cell Cycle and Division – Practice (English)</a>
+          <span>2025-07-07</span>
+        </li>
+        <li class="upload-item">
+          <a href="files/cockroach_exercise.pdf" target="_blank">Cockroach – Practice (English)</a>
+          <span>2025-07-07</span>
+        </li>
+      </ul>
+    </section>
 
-    <div class="card">
-      <h2>🤖 JaiBo (Your AI PDF Cleaner)</h2>
-      <p>Drop any PDF from coaching modules. JaiBo will automatically clean watermarks, logos, and branding, then export it back as a clean PDF. Built with AI + vision tools.</p>
-      <a class="button" href="#">Try JaiBo</a>
-    </div>
-
-    <div class="card">
-      <h2>📆 Daily Jairy Drops</h2>
-      <p>We update the site daily with new PDFs, MCQs, analytical questions, and NCERT-based solutions. Everything is restructured and verified before upload.</p>
-    </div>
+    <section id="chatSection">
+      <h2 class="section-title">Ask a Doubt</h2>
+      <div class="chat-placeholder">Chat feature coming soon ☺️</div>
+    </section>
   </main>
-  <div class="footer">
-    © 2025 Jairy.in — Clean. Free. Unstoppable. Powered by JaiBo ⚙️
-  </div>
 </body>
 </html>
