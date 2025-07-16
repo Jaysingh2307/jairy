@@ -2,7 +2,6 @@
   "name": "jairy-backend",
   "version": "1.0.0",
   "description": "Backend for Jairy",
-  "main": "backend/app.js",
   "scripts": {
     "start": "node backend/app.js"
   },
