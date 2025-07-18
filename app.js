@@ -1,1 +1,1 @@
-// Backend Express server
+// Frontend main JS logic
